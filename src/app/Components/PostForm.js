@@ -5,9 +5,6 @@ import { HiUpload } from "react-icons/hi";
 import Image from "next/image";
 import { ClipLoader } from "react-spinners";
 import slugify from "slugify";
-import ReactQuill from "react-quill";
-import RichTextEditor from "./RichTextEditor";
-import DisplayRichText from "./DisplayRichText";
 
 const PostForm = () => {
   const [photo, setPhoto] = useState(null);
@@ -50,10 +47,6 @@ const PostForm = () => {
 
   const handleTitleChange = (e) => {
     setForm({ ...form, title: e.target.value });
-  };
-
-  const handleRichTextChange = (value) => {
-    setForm({ ...form, content: value });
   };
 
   useEffect(() => {
@@ -130,9 +123,11 @@ const PostForm = () => {
 
         <div className="space-y-3 flex flex-col  ">
           <label htmlFor="desc">Description</label>
-          <RichTextEditor
+          <textarea
             value={form.content}
-            onChange={handleRichTextChange}
+            onChange={(e) => {
+              setForm({ ...form, content: e.target.value });
+            }}
           />
         </div>
 

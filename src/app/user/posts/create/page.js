@@ -1,12 +1,13 @@
 import PostForm from "@/app/Components/PostForm";
 import React from "react";
 
-const page = () => {
+const CreatePage = () => {
   return (
     <div>
-      <PostForm />
+      {" "}
+      <PostForm />{" "}
     </div>
   );
 };
 
-export default page;
+export default CreatePage;

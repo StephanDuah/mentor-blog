@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 import argon2 from "argon2";
 const userSchema = mongoose.Schema(
   {
-    name: { type: String },
-    avatar: {},
+    name: { type: String, required: true },
+    image: {},
     bio: { type: String },
-    password: { type: String },
+    password: { type: String, required: true },
     email: { type: String, unique: true, require: true },
     phone: { type: String },
   },

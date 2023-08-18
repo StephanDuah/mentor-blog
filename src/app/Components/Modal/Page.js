@@ -36,7 +36,7 @@ const Page = ({ handleClose, children, visible }) => {
             animate="visible"
             exit="exit"
             onClick={(e) => e.stopPropagation()}
-            className=" relative w-[clamp(400px,600px,80%)] bg-white h-[500px] z-50 rounded-lg shadow-lg"
+            className=" relative w-[clamp(400px,600px,80%)] bg-white  z-50 rounded-lg shadow-lg"
           >
             {children}
             <button onClick={handleClose}>

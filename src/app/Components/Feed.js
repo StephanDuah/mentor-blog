@@ -40,12 +40,8 @@ const Feed = async () => {
               <h1 className="text-2xl md:text-4xl font-semibold py-3 md:py-5 ">
                 {item.title}
               </h1>
-              <div className="leading-[1.9rem]">
-                <p>
-                  Pariatur ex consequat Lorem voluptate esse do et dolor labore
-                  ad ullamco mollit occaecat ipsum. Deserunt cupidatat excepteur
-                  irure id sunt ullamco. Esse incididunt Lorem eu mollit.
-                </p>
+              <div className="  leading-[1.9rem]">
+                <p className="w-full">{item.content.slice(0, 300)}</p>
 
                 <Link
                   href={`/user/posts/${item.slug}`}

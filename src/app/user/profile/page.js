@@ -5,9 +5,11 @@ import ProfileForm from "@/app/Components/ProfileForm";
 import User from "@/utils/Models/User";
 const Profile = async () => {
   const session = await getServerSession(authOptions);
-  const user = await User.findOne({ email: session.user.email });
+
+  const user = await User.findOne({ email: session?.user.email });
   console.log(user);
-  return <ProfileForm data={session.user} />;
+
+  return <ProfileForm data={session?.user} />;
 };
 
 export default Profile;

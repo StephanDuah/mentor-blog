@@ -14,6 +14,10 @@ const postSchema = new mongoose.Schema({
     required: true,
   },
   images: {},
+  publisher: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 const Post = mongoose.models.Post || mongoose.model("Post", postSchema);

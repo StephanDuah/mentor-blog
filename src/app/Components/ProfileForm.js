@@ -1,17 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Upload from "@/app/Components/Upload";
 import Image from "next/image";
 import { HiUpload } from "react-icons/hi";
 import { ClipLoader } from "react-spinners";
-
+import { useRouter } from "next/navigation";
 const ProfileForm = ({ data }) => {
   const [form, setForm] = useState({
-    name: data.name,
-    email: data.email,
-    bio: "",
-    phone: "",
+    name: data?.name,
+    email: data?.email,
+    bio: data?.bio,
+    phone: data?.phone,
   });
 
   const [photo, setPhoto] = useState(null);
@@ -52,15 +52,18 @@ const ProfileForm = ({ data }) => {
               </div>
             </div>
           ) : (
-            <div className="max-w-36  h-36 md:h-96">
+            <div className="relative max-w-36  h-36 md:h-96">
               <Image
-                src={photo.imageName}
+                src={data.image || photo.imageName}
                 alt="cover"
-                width={100}
-                height={100}
-                className="w-36 h-full object-cover object-center "
+                fill
+                className=" object-cover object-center "
                 priority
               />
+
+              <button className="absolute -top-5 -right-5 bg-red-500 w-[50px] h-[50px] text-lg font-bold text-white rounded-full">
+                X
+              </button>
             </div>
           )}
         </label>

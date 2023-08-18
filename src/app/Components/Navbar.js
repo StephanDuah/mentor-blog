@@ -5,11 +5,17 @@ import { signOut } from "next-auth/react";
 import Page from "./Modal/Page";
 import LoginForm from "./LoginForm";
 import { useSession } from "next-auth/react";
+import RegisterForm from "./RegisterForm";
+import Image from "next/image";
+import Logout from "./Logout";
+import Social from "./Social";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
+  const [registerVisible, setRegisterVisible] = useState(false);
   const handleClose = () => {
     setVisible(false);
+    setRegisterVisible(false);
   };
   const [open, setOpen] = useState(false);
 
@@ -24,8 +30,9 @@ const Navbar = () => {
       <div className="flex justify-around space-x-9 item-center text-black">
         {/* Icon container */}
         <Link href={"/"} className="text-lg">
-          Untitled UI
+          Pbencherey blog
         </Link>
+
         {/* Links */}
         <ul className="hidden sm:flex  justify-around space-x-4">
           <li>Home</li>
@@ -38,9 +45,18 @@ const Navbar = () => {
         <div className="flex flex-col sm:hidden justify-around space-x-4 items-center transition-all ease-out duration-200">
           <button
             onClick={handleToggle}
-            className="w-10 h-10 bg-blue-600 rounded-full text-white text-center py-2 font-bold uppercase"
+            className="relative w-10 h-10 bg-black rounded-full text-white text-center py-2 font-bold uppercase"
           >
-            p
+            {session.picture ? (
+              <Image
+                src={session?.picture.imageName}
+                alt="profileImage"
+                fill
+                className="object-fill rounded-full"
+              />
+            ) : (
+              session.name[0]
+            )}
           </button>
           <div
             className={`${
@@ -54,15 +70,13 @@ const Navbar = () => {
               Create Post
             </Link>
             <Link
-              href="/user/posts/create"
+              href="/user/profile"
               className=" text-center hover:bg-slate-200 transition-colors duration-150  px-4 py-2 active:scale-95"
             >
               Profile
             </Link>
 
-            <button className="  px-4 py-2 hover:bg-slate-200 transition-colors duration-150 active:scale-95">
-              Log out
-            </button>
+            <Logout />
           </div>
         </div>
       )}
@@ -71,12 +85,12 @@ const Navbar = () => {
       {status === "unauthenticated" ? (
         <div className="flex justify-around space-x-4 items-center">
           <button onClick={() => setVisible(true)}>Log in</button>
-          <Link
-            href="/user/register"
+          <button
+            onClick={() => setRegisterVisible(true)}
             className="bg-black text-white rounded-full px-4 py-2 active:scale-95"
           >
             Sign up
-          </Link>
+          </button>
         </div>
       ) : (
         <div className="hidden sm:flex justify-around space-x-4 items-center">
@@ -87,15 +101,28 @@ const Navbar = () => {
             Create Post
           </Link>
 
-          <button onClick={signOut}>Log out</button>
+          <Logout />
           <Link
-            href="/profile"
-            className="w-10 h-10 bg-blue-600 rounded-full text-white text-center py-2 font-bold uppercase"
+            href="/user/profile"
+            className=" relative w-10 h-10 bg-black rounded-full text-white text-center py-2 font-bold uppercase"
           >
-            p
+            {session?.picture ? (
+              <Image
+                src={session.picture.imageName}
+                alt="profileImage"
+                fill
+                className="object-fill rounded-full"
+              />
+            ) : (
+              session?.name[0]
+            )}
           </Link>
         </div>
       )}
+
+      <Page handleClose={handleClose} visible={registerVisible}>
+        <RegisterForm setVisible={setRegisterVisible} />
+      </Page>
 
       <Page handleClose={handleClose} visible={visible}>
         <LoginForm setVisible={setVisible} />

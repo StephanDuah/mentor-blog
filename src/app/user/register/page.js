@@ -1,4 +1,5 @@
 "use client";
+import Social from "@/app/Components/Social";
 import React, { useState } from "react";
 
 const Register = () => {
@@ -32,6 +33,7 @@ const Register = () => {
   };
   return (
     <div className="w-full min-h-screen max-w-[1024px] mx-auto">
+      <Social />
       <form className="" onSubmit={handleSubmit}>
         <input
           type="text"

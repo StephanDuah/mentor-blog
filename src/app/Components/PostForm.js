@@ -121,10 +121,12 @@ const PostForm = () => {
           />
         </div>
 
-        <div className="space-y-3 flex flex-col  ">
+        <div className="space-y-3 flex flex-col   ">
           <label htmlFor="desc">Description</label>
           <textarea
             value={form.content}
+            rows={10}
+            className="px-2  bg-gray-100/30 outline-none border border-gray-300"
             onChange={(e) => {
               setForm({ ...form, content: e.target.value });
             }}

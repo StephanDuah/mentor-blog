@@ -5,11 +5,13 @@ import { HiUpload } from "react-icons/hi";
 import Image from "next/image";
 import { ClipLoader } from "react-spinners";
 import slugify from "slugify";
+import { useSession } from "next-auth/react";
 
 const PostForm = () => {
   const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
+  const { data: Session } = useSession();
   const [form, setForm] = useState({
     title: "",
     content: "",
@@ -26,7 +28,12 @@ const PostForm = () => {
         "/api/posts",
         {
           method: "POST",
-          body: JSON.stringify({ ...form, images: photo, slug }),
+          body: JSON.stringify({
+            ...form,
+            images: photo,
+            slug,
+            publisher: Session.sub,
+          }),
         },
         {
           headers: {

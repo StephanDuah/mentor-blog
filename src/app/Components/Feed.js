@@ -14,7 +14,7 @@ const Feed = async () => {
       {!post ? (
         <div>No post avaible</div>
       ) : (
-        <div className="mt-9 px-8 py-3 mx-auto max-w-[1248px] grid grid-cols-1 sm:grid-cols-2 gap-[4rem]">
+        <div className=" grid grid-cols-1 sm:grid-cols-2 gap-[4rem]">
           {post.map((item) => (
             <div key={item._id} className="flex flex-col">
               <div className=" relative w-full h-72  ">
@@ -40,8 +40,8 @@ const Feed = async () => {
               <h1 className="text-2xl md:text-4xl font-semibold py-3 md:py-5 ">
                 {item.title}
               </h1>
-              <div className="  leading-[1.9rem]">
-                <p className="w-full">{item.content.slice(0, 300)}</p>
+              <div className=" line-clamp-2  leading-[1.9rem]">
+                <p className="w-full">{item.content}</p>
 
                 <Link
                   href={`/user/posts/${item.slug}`}

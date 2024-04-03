@@ -20,8 +20,6 @@ export const POST = async (req) => {
     const user = await User(body);
     await user.save();
 
-    await db.disconnect();
-
     return NextResponse.json("your are registered");
   } catch (error) {
     console.log(error);

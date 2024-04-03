@@ -28,7 +28,7 @@ const handler = NextAuth({
         await db.connect();
         const userEmail = await User.findOne({ email });
         const userPhone = await User.findOne({ phone: email });
-        await db.disconnect();
+
         const user = userEmail || userPhone;
 
         console.log(user);

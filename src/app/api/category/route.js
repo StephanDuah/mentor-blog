@@ -5,7 +5,7 @@ export const GET = async () => {
   try {
     await db.connect();
     const categories = await Category.find({});
-    await db.disconnect();
+
     return NextResponse.json(categories);
   } catch (error) {
     console.log(error);

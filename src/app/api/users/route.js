@@ -5,7 +5,7 @@ export const GET = async () => {
   try {
     await db.connect();
     const user = await User.find({});
-    await db.disconnect();
+
     if (!user) {
       return NextResponse.json("No user found");
     }

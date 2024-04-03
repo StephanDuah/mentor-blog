@@ -6,7 +6,7 @@ export const GET = async () => {
   try {
     await db.connect();
     const user = await Post.find({});
-    await db.disconnect();
+
     if (!user) {
       return NextResponse.json("No user found");
     }
@@ -22,7 +22,6 @@ export const POST = async (req) => {
     await db.connect();
     const user = await Post(body);
     await user.save();
-    await db.disconnect();
 
     return NextResponse.json("your are registered");
   } catch (error) {

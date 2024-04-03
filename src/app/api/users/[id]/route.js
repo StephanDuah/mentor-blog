@@ -8,7 +8,6 @@ export const PATCH = async (req, ctx) => {
   try {
     await db.connect();
     await User.updateOne({ email }, body);
-    await db.disconnect();
 
     return NextResponse.json("Update Successfully");
   } catch (error) {

@@ -30,6 +30,7 @@ const Feed = async () => {
 const PostContainer = async ({ item }) => {
   await db.connect();
   const user = await User.findOne({ _id: item.publisher });
+  console.log(user);
 
   return (
     <div className="flex flex-col">
@@ -45,7 +46,7 @@ const PostContainer = async ({ item }) => {
         />
         <div className="absolute bottom-0 left-0 right-0 w-full   h-[30%] glass text-white px-4 py-6 flex justify-between">
           <div>
-            <h1>{user.name}</h1>
+            <h1>{user && user.name}</h1>
             <p>
               {item.createdAt ? formatDateOnly(item.createdAt) : "20 jan 2024"}
             </p>

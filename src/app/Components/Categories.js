@@ -7,14 +7,14 @@ const Categories = async () => {
   const categories = await Category.find({});
 
   return (
-    <div className=" mb-[4rem] space-y-4 w-[50%] ">
-      <h2 className="text-3xl font-bold">Categories</h2>
+    <div className="w-full py-3 px-4 flex flex-col bg-gray-200 gap-5">
+      <h1 className="text-3xl font-semibold ">Categories</h1>
 
-      <div className="inline-flex mb-5 space-x-3 text-gray-500 whitespace-nowrap ">
+      <div className="space-y-4">
         {categories.map((category, id) => (
-          <p key={id} className="button">
+          <div key={id} className="border-b border-gray-700/40 py-3">
             {category.name}
-          </p>
+          </div>
         ))}
       </div>
     </div>

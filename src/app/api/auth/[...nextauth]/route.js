@@ -31,8 +31,6 @@ const handler = NextAuth({
 
         const user = userEmail || userPhone;
 
-        console.log(user);
-
         const verify = await argon2.verify(user.password, password);
 
         if (!user || !verify) {

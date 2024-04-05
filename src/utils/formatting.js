@@ -51,3 +51,16 @@ export function formatTimeOnly(timestamp) {
 
   return formattedTime;
 }
+
+export function removeFirstLine(paragraph) {
+  // Split the paragraph into lines based on newline characters
+  var lines = paragraph.split("\n");
+
+  // Remove the first line
+  lines.shift();
+
+  // Join the remaining lines back together
+  var modifiedParagraph = lines.join("\n");
+
+  return modifiedParagraph;
+}

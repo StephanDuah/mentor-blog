@@ -64,3 +64,9 @@ export function removeFirstLine(paragraph) {
 
   return modifiedParagraph;
 }
+
+export function getRegex(text) {
+  const pattern = new RegExp(text, "i");
+
+  return pattern;
+}

@@ -7,27 +7,41 @@ import db from "@/utils/Database/db";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import User from "@/utils/Models/User";
 import { formatDate, formatDateOnly, formatTimeOnly } from "@/utils/formatting";
+import PaginationButtons from "./PaginationButtons";
 
-const Feed = async () => {
+const Feed = async ({ currentPageNumber }) => {
   await db.connect();
-  const post = await Post.find({});
+  const currentPage = currentPageNumber || 1;
+  const pageSize = 6;
+  const skip = (currentPage - 1) * pageSize;
+
+  let totalPage;
+  const post = await Post.find({}).limit(pageSize).skip(skip);
+  const documents = await Post.countDocuments({});
+  totalPage = Math.ceil(documents / pageSize);
 
   return (
     <>
       {!post ? (
         <div>No post avaible</div>
       ) : (
-        <div className=" grid grid-cols-1 sm:grid-cols-2 gap-5 ">
-          {post.map((item) => (
-            <PostContainer key={item._id} item={item} />
-          ))}
+        <div>
+          <div className=" grid grid-cols-1 sm:grid-cols-2 gap-5 ">
+            {post.map((item) => (
+              <PostContainer key={item._id} item={item} />
+            ))}
+          </div>
+          <PaginationButtons
+            currentPageNumber={currentPageNumber}
+            totalPages={totalPage}
+          />
         </div>
       )}
     </>
   );
 };
 
-const PostContainer = async ({ item }) => {
+export const PostContainer = async ({ item }) => {
   await db.connect();
   const user = await User.findOne({ _id: item.publisher });
   console.log(user);

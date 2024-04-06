@@ -15,6 +15,7 @@ import PopularPost from "@/app/Components/PopularPost";
 import User from "@/utils/Models/User";
 import AsidebarLoader from "@/app/Components/LoadingSkeletons/AsidebarLoader";
 import ReactMarkdown from "react-markdown";
+import AsideLayout from "@/app/Components/AsideLayout";
 export const revalidate = 60;
 
 export async function generateStaticParams() {
@@ -32,7 +33,7 @@ const Details = async ({ params }) => {
   const user = await User.findOne({ _id: post.publisher });
 
   return (
-    <article className="mx-auto p-8 max-w-7xl my-10 mt-40  grid grid-cols-1 md:grid-cols-3 gap-10">
+    <AsideLayout>
       {post && (
         <div className="col-span-2 space-y-4">
           <div>
@@ -56,17 +57,7 @@ const Details = async ({ params }) => {
           </div>
         </div>
       )}
-
-      <aside className="flex flex-col gap-8 ">
-        <Searchbar />
-        <Suspense fallback={<AsidebarLoader />}>
-          <Categories />
-        </Suspense>
-        <Suspense fallback={<AsidebarLoader />}>
-          <PopularPost />
-        </Suspense>
-      </aside>
-    </article>
+    </AsideLayout>
   );
 };
 

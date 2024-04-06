@@ -40,7 +40,6 @@ const Login = () => {
           onChange={(e) => setForm({ ...form, password: e.target.value })}
         />
         <button className="px-6 py-3 bg-black text-white block">Login</button>
-        
       </form>
     </div>
   );
